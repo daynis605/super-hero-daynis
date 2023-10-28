@@ -1,4 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./scss/variables/colors";
+@import "scss/variables/fonts.scss";
+@import "scss/utilities";
+
+@font-face {
+    font-family: "Encode-Light";
+    src: url(assets/font/static/EncodeSans/EncodeSans-Light.ttf)
+      format("opentype");
+  }
+  
+  @font-face {
+    font-family: "Encode-Bold";
+    src: url(assets/font/static/EncodeSans/EncodeSans-Bold.ttf) format("opentype");
+  }
+  
+  @font-face {
+    font-family: "Encode-Regular";
+    src: url(assets/font/static/EncodeSans/EncodeSans-Bold.ttf) format("opentype");
+  }
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

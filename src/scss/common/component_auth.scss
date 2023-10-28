@@ -1,0 +1,51 @@
+.auth {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/assets/img/auth.png);
+  height: 100vh;
+  width: 100vw;
+
+  &__title {
+    font-size: var(--font-title);
+    font-family: "Encode-Regular";
+    color: var(--color-primary);
+  }
+
+  &__submit {
+    background-color: var(--color-primary);
+    font-family: "Encode-Regular";
+    color: var(--color-light);
+    padding: var(--padding-ten-px);
+    font-size: var(--font-bton-text);
+    border-radius: var(--padding-two-px);
+    border: var(--padding-two-px) solid var(--color-primary);
+
+    &:disabled {
+      opacity: 0.8;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-light);
+      border: var(--padding-two-px) solid var(--color-primary);
+      color: var(--color-primary);
+    }
+  }
+
+  &__form-cuestion {
+    font-size: var(--font-bton-text);
+    color: var(--color-text-light);
+  }
+
+  &__secundary {
+    font-size: var(--font-bton-text);
+    color: var(--color-primary);
+    font-family: "Encode-Regular";
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      font-weight: bold;
+      color: var(--color-primary-light);
+    }
+  }
+}

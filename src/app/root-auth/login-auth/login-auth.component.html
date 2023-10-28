@@ -1,0 +1,33 @@
+<section class="auth">
+
+  <div class="row m-auto full-height justify-content-center align-items-center">
+      <mat-card class="col-10 col-sm-8 col-md-6 col-lg-4 col-xl-4 text-center p-4">
+
+          <h1 class="auth__title">Inicio de Sesión</h1>
+          <mat-card-content>
+              <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+
+                  <div class="mt-2">
+                      <paz-form-input [controlName]="'email'" [errorMessage]="getEmailError()" 
+                          [placeholder]="'Correo *'" [activeIcon]="'mail'"/>
+                  </div>
+
+                  <div class="mt-2">
+                      <paz-form-password [controlName]="'password'" [errorMessage]="getPasswordError()"
+                       [placeholder]="'Contraseña *'"/>
+                  </div>
+
+                      <div class="text-center m-3">
+                          <button type="submit" [disabled]="!loginForm.valid" class="auth__submit full-width">Iniciar
+                              sesión</button>
+                      </div>
+
+                      <div class="auth__form-cuestion mt-2">
+                          ¿Aún no tiene cuenta?<span class="auth__secundary" [routerLink]="['/auth/register']"> Registrar nueva cuenta</span> 
+                      </div>    
+              </form>          
+          </mat-card-content>
+      </mat-card>
+  </div>
+
+</section>

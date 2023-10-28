@@ -1,0 +1,17 @@
+<mat-form-field class="full-width" appearance="outline">
+
+  <input aria-label="form_input_text" [type]="typeInput" matInput [formControlName]="controlName"
+    [placeholder]="placeholder" uppercase *ngIf="controlName =='name'; else otherInput">
+
+  <ng-template #otherInput>
+    <input aria-label="form_input_text" [type]="typeInput" matInput [formControlName]="controlName"
+      [placeholder]="placeholder"></ng-template>
+
+  <mat-icon matSuffix><span class="material-symbols-outlined icon">
+
+      {{activeIcon}}
+    </span></mat-icon>
+  <mat-error>
+    {{ errorMessage }}
+  </mat-error>
+</mat-form-field>

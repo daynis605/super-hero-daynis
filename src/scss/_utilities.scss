@@ -1,0 +1,67 @@
+.full-width {
+    width: 100%;
+}
+
+.full-height {
+    height: 100%;
+}
+
+button:focus {
+    outline: none !important;
+    box-shadow: none;
+}
+
+.btn-main {
+    border: var(--padding-two-px) solid var(--color-primary);
+    border-radius: var(--padding-two-px);
+    background: var(--color-primary);
+    font-family: "Encode-Regular";
+    padding: 4px 21px;
+    color: var(--color-light);
+    cursor: pointer;
+    &:hover:not(:disabled)  {
+        background: var(--color-light);
+        color:  var(--color-primary);
+    }
+    &:disabled {
+        cursor: default;
+        opacity: 0.8;
+      }
+
+}
+
+.btn-secundary {
+    border: var(--padding-two-px) solid var(--color-light);
+    border-radius: var(--padding-two-px);
+    background: var(--color-light);
+    font-family: "Encode-Regular";
+    padding: 4px 21px;
+    color: var(--color-primary);
+    font-size: var(--font-bton-text);
+
+    &:hover {
+        border: var(--padding-two-px) solid var(--color-primary);
+
+    }
+}
+
+.placeholder{
+    text-transform: none;
+}
+
+.position{
+    position: relative;
+}
+
+.icon {
+    color: var(--color-text-light);
+    cursor: pointer;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+    background-color: var(--color-primary-light) !important;
+}
+
+.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+    color: var(--color-light) !important;
+}
