@@ -16,19 +16,19 @@ export class AuthService{
   public login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password)
       .then((value) => {
-        localStorage.setItem('auth', JSON.stringify(true));
+        sessionStorage.setItem('auth', JSON.stringify(true));
       })
 
   }
 
   public logout() {
-    localStorage.removeItem('auth');
+    sessionStorage.removeItem('auth');
     return signOut(this.auth);
   }
 
 
   public isLogin(): boolean {
-    return localStorage.getItem('auth')!=null ? true : false
+    return sessionStorage.getItem('auth')!=null ? true : false
   }
 
 }
