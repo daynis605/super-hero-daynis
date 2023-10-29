@@ -5,7 +5,7 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signO
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService{
 
   constructor(private auth: Auth) { }
 
@@ -16,22 +16,19 @@ export class AuthService {
   public login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password)
       .then((value) => {
-        sessionStorage.setItem('auth', JSON.stringify(true));
+        localStorage.setItem('auth', JSON.stringify(true));
       })
 
   }
 
   public logout() {
-    sessionStorage.removeItem('auth');
+    localStorage.removeItem('auth');
     return signOut(this.auth);
   }
 
+
   public isLogin(): boolean {
-    if(sessionStorage && sessionStorage.getItem('auth')){
-      return true
-    }
-    else return false
-   // return sessionStorage.getItem('auth')!=null  ? true : false
+    return localStorage.getItem('auth')!=null ? true : false
   }
 
 }

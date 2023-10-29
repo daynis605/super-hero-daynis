@@ -1,0 +1,101 @@
+
+<div class="list-superheros m-4">
+
+  <h1>Listado de super héroe</h1>
+
+  <div class="row m-auto justify-content-between align-items-cente">
+  
+    <div class="col-6 ps-0 position">
+      <mat-form-field appearance="outline" class="full-width">
+        <input aria-label="filter_input_text" [(ngModel)]="valueFilter" (keyup.enter)="filterApply()" type="text" matInput 
+          placeholder="Filtrar super héroes">
+      </mat-form-field>
+      <button class="btn-main btn-main--modificate btn-seach" (click)="filterApply()">Buscar</button>
+      
+    </div>
+
+    <div class="col-6 text-end">
+      <button class="btn-main" [routerLink]="['/home/add']">Adicionar</button>
+    </div>
+
+  </div>
+  
+  <div class="list-superheros__list">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.name }}
+        </td>
+      </ng-container>
+  
+      <!-- Description Column-->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Descripción</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.description }}
+        </td>
+      </ng-container>
+  
+      <!-- Powers Column-->
+      <ng-container matColumnDef="powers">
+        <th mat-header-cell *matHeaderCellDef>Poder</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.powers }}
+        </td>
+      </ng-container>
+  
+      <!-- Battle numbers Column-->
+      <ng-container matColumnDef="battle_numbers">
+        <th mat-header-cell *matHeaderCellDef>Batallas</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.battle_numbers }}
+        </td>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="text-center">Acciones</th>
+  
+        <td mat-cell *matCellDef="let row; let i = index" class="text-center">
+
+          <mat-icon
+            class="icon icon__edit me-3"
+            aria-hidden="false"
+            (click)="edit(row)"
+            aria-label="Example home icon"
+            ><span class="material-symbols-outlined">
+              edit
+            </span></mat-icon
+          >
+          <mat-icon
+            class="icon icon__delete"
+            aria-hidden="false"
+            (click)="delete(row, i)"
+            aria-label="Example home icon"
+            ><span class="material-symbols-outlined">
+              delete
+            </span></mat-icon
+          >
+        </td>
+      </ng-container>
+  
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns; sticky: true"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns; let i = index"
+      ></tr>
+    </table>
+  </div>
+  <mat-paginator 
+  [length]="resultsLength" 
+  pageSize="10" aria-label="Select page of superheros" [showFirstLastButtons]="true"></mat-paginator>
+
+</div>
+
+

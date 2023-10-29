@@ -1,0 +1,33 @@
+<div class="dialog-delete">
+
+  <div class="dialog-delete__title d-flex justify-content-between align-items-center">
+    <span>ELIMINAR SUPER HÉROE</span>
+  
+    <mat-icon
+      [mat-dialog-close]="false"
+      class="ui-cursor-pointer"
+      aria-hidden="false"
+      aria-label="Example home icon"
+      >close</mat-icon
+    >
+  </div>
+
+  <div class="dialog-delete__description">
+    <span>
+      Vas a eliminar el super héroe seleccionado. Esta acción no se puede deshacer.
+    </span>
+    <br />
+    <span> ¿Está seguro que quiere hacerlo?</span>
+  </div>
+
+  <div class="dialog-delete__actions d-flex justify-content-between align-items-center">
+    <button class="btn-secundary" [mat-dialog-close]="false">
+      Cancelar
+    </button>
+
+    <button class="btn-main" [mat-dialog-close]="true">
+      Confirmar
+    </button>
+
+  </div>
+</div>

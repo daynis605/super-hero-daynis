@@ -1,0 +1,30 @@
+
+.dialog-delete {
+    &__title {
+      padding: 2rem 1.5rem 1rem;
+      border-bottom: 1px solid var(--color-primary);
+      span {
+        font-size: var(--font-bton-text);
+        color: var(--color-error);
+        font-family: "Encode-Regular";
+      }
+    }
+
+    mat-icon {
+      color: var(--color-text-light);
+      font-size: 28px;
+    }
+
+    &__actions {
+      padding: 11px 18px;
+    }
+  
+    &__description {
+      margin: 2rem 1.2rem;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 31px;
+      color: var(--color-text-light);
+      font-family: "Encode-Light";
+    }
+  }

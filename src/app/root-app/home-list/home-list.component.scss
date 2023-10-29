@@ -1,0 +1,65 @@
+.list-superheros__list {
+    max-height: 471px;
+    overflow-x: auto;
+}
+
+td.mat-mdc-cell.mdc-data-table__cell.cdk-cell {
+    font-family: "Encode-Regular";
+    color: var(--color-text-light);
+    font-size: var(--font-text);
+}
+
+tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row.ng-star-inserted {
+    background: var(--color-primary-light);
+    color: var(--color-light);
+    font-family: "Encode-Regular";
+}
+
+tr.mat-mdc-row.mdc-data-table__row:nth-child(odd) {
+    background-color: var(--color-bg-table);
+}
+
+tr.mat-mdc-row.mdc-data-table__row:nth-child(even) {
+    background-color: var(--color-bg-table-light);
+}
+
+td.mat-column-actions {
+    min-width: 7rem;
+}
+
+td.mat-column-powers {
+    max-width: 22rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+td.mat-column-description {
+    max-width: 21rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.icon {
+    color: var(--color-primary);
+    &__delete {
+        color: var(--color-error);
+    }
+}
+
+.btn-main {
+    height: 3.5rem;
+    &--modificate {
+        position: absolute;
+        right: var(--font-text);
+   
+    }
+}
+
+h1 {
+    color: var(--color-primary-light);
+    font-family: "Encode-Regular";
+    font-size: 18px;
+    text-decoration: underline;
+}

@@ -1,0 +1,31 @@
+header {
+    height: 8vh;
+    background: var(--color-light);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+body {
+    height: 91vh;
+//    margin-top: 4px;
+    overflow: auto;
+    background-color: var(--color-bg-table-light);
+}
+
+img {
+    height: 100%;
+    padding: 3px;
+}
+
+h1 {
+    margin-bottom: 0;
+    font-size: var(--font-title);
+    color: var(--color-primary-light);
+    font-weight: 900 !important;
+}
+
+.loader {
+    position: absolute;
+    top: 4rem;
+    z-index: 1;
+    width: 100%;
+}

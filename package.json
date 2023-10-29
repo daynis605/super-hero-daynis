@@ -7,11 +7,7 @@
     "start": "json-server --watch db/db.json  & ng serve ",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "dev:ssr": "ng run super-hero-daynis:serve-ssr",
-    "serve:ssr": "node dist/super-hero-daynis/server/main.js",
-    "build:ssr": "ng build && ng run super-hero-daynis:server",
-    "prerender": "ng run super-hero-daynis:prerender"
+    "test": "ng test"
   },
   "dependencies": {
     "@angular/animations": "^16.2.0",
@@ -26,9 +22,7 @@
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/platform-server": "^16.2.0",
     "@angular/router": "^16.2.0",
-    "@nguniversal/express-engine": "^16.2.0",
     "bootstrap": "^5.3.2",
-    "express": "^4.15.2",
     "firebase": "^10.5.0",
     "json-server": "^0.17.4",
     "rxjs": "~7.8.0",
@@ -40,8 +34,6 @@
     "@angular-devkit/build-angular": "^16.2.6",
     "@angular/cli": "^16.2.6",
     "@angular/compiler-cli": "^16.2.0",
-    "@nguniversal/builders": "^16.2.0",
-    "@types/express": "^4.17.0",
     "@types/jasmine": "~4.3.0",
     "@types/node": "^16.11.7",
     "@types/uuid": "^9.0.6",
