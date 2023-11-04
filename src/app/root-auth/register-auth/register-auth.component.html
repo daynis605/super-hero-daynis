@@ -9,17 +9,20 @@
         <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
 
           <div class="mt-2">
-            <paz-form-input [controlName]="'email'" [errorMessage]="getEmailError()"
+            <paz-form-input [controlName]="'email'" 
+              [errorMessage]="this.registerForm.get('email')?.errors ? 'El correo es inválido' : null" 
               [placeholder]="'Correo *'" [activeIcon]="'mail'"/>
           </div>
 
           <div class="mt-2">
-            <paz-form-password [controlName]="'password'" [errorMessage]="getPasswordError()" 
+            <paz-form-password [controlName]="'password'" 
+              [errorMessage]="this.registerForm.get('password')?.errors ? 'La contraseña es obligatoria y como mínimo 6 carácteres.' : null" 
               [placeholder]="'Nueva contraseña *'"/>
           </div>
 
           <div class="mt-2">
-            <paz-form-password [controlName]="'password_repeat'" [errorMessage]="getPasswordError()"
+            <paz-form-password [controlName]="'password_repeat'"
+            [errorMessage]="this.registerForm.get('password_repeat')?.errors ? 'La contraseña es obligatoria y como mínimo 6 carácteres.' : null" 
              [placeholder]="'Repetir contraseña *'"/>
           </div>
 

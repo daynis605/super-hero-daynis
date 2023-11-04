@@ -5,15 +5,16 @@
   <div class="row m-auto full-height justify-content-center align-items-center mt-4">
     <mat-card class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-5 text-center p-4">
 
-      <img class="m-auto" [src]="hero?.photo" alt="Photo" >
+      <img class="m-auto" [src]="hero?.photo" alt="Photo">
 
       <mat-card-content>
         <form [formGroup]="editForm" (ngSubmit)="submitForm()">
 
           <div class="d-flex justify-content-between flex-wrap">
             <div class="col-12 col-sm-6 pe-1 mt-2">
-              <paz-form-input [controlName]="'name'" [errorMessage]="getNameError()" [placeholder]="'Nombre *'"
-                [activeIcon]="'badge'" />
+              <paz-form-input [controlName]="'name'"
+                [errorMessage]="this.editForm.get('name')?.errors ? 'El nombre es requerido' : null"
+                [placeholder]="'Nombre *'" [activeIcon]="'badge'" />
             </div>
 
             <div class="col-12 col-sm-6 ps-1 mt-2 ">

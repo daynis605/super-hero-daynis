@@ -9,7 +9,7 @@
         <form [formGroup]="addForm" (ngSubmit)="submitForm()">
 
           <div class="mt-2">
-            <paz-form-input [controlName]="'name'" [errorMessage]="getNameError()" 
+            <paz-form-input [controlName]="'name'" [errorMessage]="this.addForm.get('name')?.errors ? 'El nombre es requerido' : null" 
               [placeholder]="'Nombre *'" [activeIcon]="'badge'" />
           </div>
 

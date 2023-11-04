@@ -5,20 +5,20 @@ import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signO
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService{
+export class AuthService {
 
   constructor(private auth: Auth) { }
 
-  public register(email: string, password: string) {
+  public register(email: string, password: string): Promise<any> {
     return createUserWithEmailAndPassword(this.auth, email, password)
   }
 
-  public login(email: string, password: string) {
+  public login(email: string, password: string): Promise<any> {
     return signInWithEmailAndPassword(this.auth, email, password)
       .then((value) => {
         sessionStorage.setItem('auth', JSON.stringify(true));
-      })
-
+      }
+      )
   }
 
   public logout() {
@@ -28,7 +28,7 @@ export class AuthService{
 
 
   public isLogin(): boolean {
-    return sessionStorage.getItem('auth')!=null ? true : false
+    return sessionStorage.getItem('auth') != null ? true : false
   }
 
 }

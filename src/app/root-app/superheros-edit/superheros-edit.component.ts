@@ -20,14 +20,15 @@ export class SuperherosEditComponent implements OnInit {
     powers: new FormControl(''),
     battle_numbers: new FormControl(0),
   });
+
   public hero!: SuperherosI | null 
-  @Input() id = ''
+  @Input() id = '0'
 
   constructor(private superherosService: SuperherosService, private _snackBar: MatSnackBar,
     private router: Router) { }
 
   ngOnInit() {
-    this.loadSuperHeroById()
+   this.loadSuperHeroById()
   }
 
   public submitForm() {
@@ -50,26 +51,6 @@ export class SuperherosEditComponent implements OnInit {
           this.openSnackBar('Se ha producido un error al editar el super héroe,');
         },
       });
-
-  }
-
-  public getNameError() {
-    if (
-      !this.editForm.get('name')?.touched ||
-      !this.editForm.get('name')?.errors
-    ) {
-      return null;
-    }
-
-    if (
-      this.editForm.get('name')?.errors?.['required'] &&
-      this.editForm.get('name')?.dirty &&
-      this.editForm.get('name')?.touched
-    ) {
-      return 'El nombre es requerido';
-    }
-
-    return null;
   }
 
   private openSnackBar(text: string) {

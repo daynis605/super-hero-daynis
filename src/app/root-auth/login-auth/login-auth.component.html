@@ -8,12 +8,14 @@
               <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
 
                   <div class="mt-2">
-                      <paz-form-input [controlName]="'email'" [errorMessage]="getEmailError()" 
+                      <paz-form-input [controlName]="'email'" 
+                      [errorMessage]="this.loginForm.get('email')?.errors ? 'El correo es inválido' : null" 
                           [placeholder]="'Correo *'" [activeIcon]="'mail'"/>
                   </div>
 
                   <div class="mt-2">
-                      <paz-form-password [controlName]="'password'" [errorMessage]="getPasswordError()"
+                      <paz-form-password [controlName]="'password'" 
+                      [errorMessage]="this.loginForm.get('password')?.errors ? 'La contraseña es obligatoria y como mínimo 6 carácteres.' : null" 
                        [placeholder]="'Contraseña *'"/>
                   </div>
 

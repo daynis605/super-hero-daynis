@@ -10,7 +10,7 @@ export class InteceptorService implements HttpInterceptor {
 
   constructor(private loading: LoaderService) { }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+ intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.method != 'GET'  )
       this.loading.isLoading.next(true)
 

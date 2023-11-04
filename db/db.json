@@ -1,169 +1,164 @@
 {
   "superheros": [
-      {
-          "id": "123e4567-e89b-12d3-a456-426655440000",
-          "name": "Thor",
-          "description": "Es un superhéroe y príncipe-guerrero de Asgard, dios del trueno, y protector de la tierra, y de los 9 reinos",
-          "photo": "https://static.wikia.nocookie.net/featteca/images/0/04/Thor_MCU_Pre-Despertar.png/revision/latest?cb=20210218182144&path-prefix=es",
-          "powers": "Fuerza sobrehumana, resistencia, durabilidad, velocidad,...",
-          "battle_numbers": "87"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440001",
-          "name": "Batman",
-          "description": "Apodado el caballero oscuro, Bruce Wayne adopto el disfraz de un murcielago para combatir el mal de Gotham",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqQ4r8jFGbBtkqLH1D98KD8aLbT4hzVKforQ&usqp=CAU",
-          "powers": "Intelecto, tecnologia y dinero",
-          "battle_numbers": "57"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440002",
-          "name": "Spiderman",
-          "description": "Apodado el hombre araña, Peter Parker tras ser picado por una araña en un laboratorio adquiere superpoderes",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc0I8xypw9ssz4LBRWZu-BzbSDhCuxzQKV8Q&usqp=CAU",
-          "powers": "Fuerza, velocidad, durabilidad, agilidad, sentidos, reflejos, coordinación, equilibrio y resistencia sobrehumanos",
-          "battle_numbers": "16"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440003",
-          "name": "Ironman",
-          "description": "Tony Stark, genio, multimillonario, playboy y filántropo",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLw5ubh9p0hhOd-iDbSYiVFGf4oZ_bD2HCOg&usqp=CAU",
-          "powers": "Repulsores de energía y misiles de proyección. Regenerativo soporte vital.",
-          "battle_numbers": "69"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440004",
-          "name": "Superman",
-          "description": "El primer super heroe de la historia del comic, viene de otro planeta y tiene muchos poderes",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4clU6CQ3nZ7posihNre6Ki6bJV0NTHUDnHQ&usqp=CAU",
-          "powers": "Súper fuerza, invulnerabilidad, visión calorífica, el aliento helado...",
-          "battle_numbers": "38"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440005",
-          "name": "Lobezno",
-          "description": "También conocido como logan, sufre una mutación genetica que luego se convierte en una mejora de laboratorio",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJeCWh69qpjY78jObPpabVmkpIKL8-Edo7jQ&usqp=CAU",
-          "powers": "Capacidades físicas mejoradas.",
-          "battle_numbers": "54"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440006",
-          "name": "Capitán America",
-          "description": "Peter Rogers, un soldado enclenque, se ofrece voluntario para un experimento el cual aumenta mucho sus condiciones fisicas",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaTy-0IkQyTq6U7xzoAsnqPeHCJTruYH1L5Q&usqp=CAU",
-          "powers": "Sentidos, agilidad, velocidad y fuerza sobrehumanas. Gran habilidad con su escudo. Instinto de liderazgo, gran resistencia, inmune a gases y enfermedades, curación y regeneración acelerada",
-          "battle_numbers": "89"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440008",
-          "name": "Hulk",
-          "description": "Bruce Banner, un cientifico que sufre la radioacion gamma, en un experimento del cual formaba parte, transformandose en verde iy adquieriendo super poderes",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHJ_PMKfSt7mKCoyXVxD2T3r08mnz7VBuizg&usqp=CAU",
-          "powers": "Inmune a las balas, aumento capacidades fisicas...",
-          "battle_numbers": "75"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440009",
-          "name": "Wonder Woman",
-          "description": "La primera super heroína del mundo del comic, hija de dioses",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQms4bfAN3LmOxwDLoZw4CBzs7kMxhyCCuliQ&usqp=CAU",
-          "powers": "Super fuerza, volar, super velocidad, super resistencia...",
-          "battle_numbers": "39"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440010",
-          "name": "Dr. Strange",
-          "description": "Stephen Strange, famoso cirujano, sufre un accidente que le impide operar mas y en busca de soluciones para ello, da con un poder superior, magia",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjew5uQTkTVwEqhOrv9ESBCttf56hhEDOCzA&usqp=CAU",
-          "powers": "Mago, controla el espacio y el tiempo",
-          "battle_numbers": "29"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440011",
-          "name": "Black Panther",
-          "description": "el rey de wakanda, con una alta capacidad tecnologica, dispone de un traje que le permite potenciar ciertas habildiades",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8sjsKvEHtQoeJ1Dnnic7bZmjQ9bsA2Ri79w&usqp=CAU",
-          "powers": "Fuerza sobrehumana, velocidad, reflejos, agilidad, resistencia, durabilidad y sentidos",
-          "battle_numbers": "25"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440012",
-          "name": "Viuda Negra",
-          "description": "Natasha romanov, agente rusa entrenada como espía, artista marcial y francotiradora, y equipada con un arsenal de armas de alta tecnología, que incluye un par de armas",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8G4d6wuvf-9mxJD-GKyKANa_XXEpFN6_aeA&usqp=CAU",
-          "powers": "Envejecimiento tardío. Super velocidad",
-          "battle_numbers": "120"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440013",
-          "name": "Wanda Maximoff",
-          "description": "huérfana que fue mejorada por el Alto Evolucionador en el Monte Wundagore convirtiéndose en un conducto de Magia del Caos que le permitía manipular la probabilidad y deformar la propia realidad.",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9bunXCPSf56sHlGDKpU0cAKf9rWkrjPnd5w&usqp=CAU",
-          "powers": "Capáz de mover y manipular objetos usando su energía psiónica.",
-          "battle_numbers": "44"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440014",
-          "name": "Aquaman",
-          "description": "Aquaman es el gobernante telepático de la Atlántida y de los océanos de la Tierra, un Atlante con increíble fuerza y ​​velocidad, así como la capacidad de ordenar toda la vida marina. Su fisiología única le permite sobrevivir en tierra y en las grandes profundidades del océano de presión y temperatura.",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP1aZChUH8Twk5Y0wx1Pfwa-E0V-gqrBy1AA&usqp=CAU",
-          "powers": "Increíble fuerza y ​​velocidad, así como la capacidad de ordenar toda la vida marina.",
-          "battle_numbers": "33"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440015",
-          "name": "Flash",
-          "description": "Barry allen, tiene la capacidad de superar la velocidad de la luz e incluso viajar en el tiempo",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYhHhZWh2fzoFlwTCzmsUZ7-1uP2yfy492KQ&usqp=CAU",
-          "powers": "Rapidez sobrehumana, la cual incluye la habilidad de correr a gran velocidad, reflejos sobrehumanos y la capacidad de violar algunas leyes de la física.",
-          "battle_numbers": "17"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440016",
-          "name": "Capitana Marvel",
-          "description": "Carol Susan Jane Danvers es una ex piloto de la Fuerza Aérea de los Estados Unidos que, al destruir el Motor de velocidad de la luz fabricado por su mentora Mar-Vell, fue expuesta a la energía del Teseracto, obteniendo poderes cósmicos y fue raptada para servir al Imperio Kree.",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNTjzENFPBRNykqhx-cAPBQC_lW-5P6DGovA&usqp=CAU",
-          "powers": "Capacidad de viajar a la velocidad de la luz. Generación de radiación. Manipulación de energía. Manipulación de la gravedad.",
-          "battle_numbers": "32"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440017",
-          "name": "Ant Man",
-          "description": "ladrón reformado y un experto en electrónica",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB-9JCqW7bCrBCiJaqdSHqzCxBpoLlq9g3WQ&usqp=CAU",
-          "powers": "Poder de encogerse (y de otras personas y objetos junto con él) al tamaño de una hormiga y volver a la normalidad.",
-          "battle_numbers": "25"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440018",
-          "name": "Linterna Verde",
-          "description": "Hal jordan un piloto temerario, encuentra un extraterrestre que pertenece a un grupo intergalactico que le transfiere poderes",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcXX95JUJpFbUkVT5KCUdvrM0GJFBjyAJdxQ&usqp=CAU",
-          "powers": "Jordan es semi-invulnerable, capaz de proyectar construcciones sólidas de luz, volar y utilizar varias otras habilidades a través de su anillo de poder, que sólo están limitadas por su imaginación y fuerza de voluntad. Jordan como un Linterna Verde tiene una fuerza de voluntad excepcional.",
-          "battle_numbers": "33"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440019",
-          "name": "Shazam",
-          "description": "Billy Batson, un niño, que mediante un mago y decir la palabra Shazam se convierte en adulto con superpoderes",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIRqCDY2mCj3GQGBGoNb0LMbh5f94-6DA07Q&usqp=CAU",
-          "powers": "Tiene la sabiduría de Salomón, la fuerza de Hércules, el aguante de Atlas, el poder de Zeus, el coraje de Aquiles y la velocidad de Mercurio. Esto da a Shazam una serie de habilidades muy parecidas a Superman que incluyen súper-fuerza invulnerabilidad y vuelo",
-          "battle_numbers": "9"
-        },
-        {
-          "id": "123e4567-e89b-12d3-a456-426655440020",
-          "name": "Antorcha Humana",
-          "description": "la Antorcha Humana obtuvo sus poderes en una nave espacial bombardeada por rayos cósmicos.",
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgUhHHOKQdR2ho7gpQYA4B9_L_6pHdlSKPUQ&usqp=CAU",
-          "powers": "Puede envolver su cuerpo en llamas; volar; piroquinesis",
-          "battle_numbers": "30"
-        }
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440000",
+      "name": "Thor",
+      "description": "Es un superhéroe y príncipe-guerrero de Asgard, dios del trueno, y protector de la tierra, y de los 9 reinos",
+      "photo": "https://static.wikia.nocookie.net/featteca/images/0/04/Thor_MCU_Pre-Despertar.png/revision/latest?cb=20210218182144&path-prefix=es",
+      "powers": "Fuerza sobrehumana, resistencia, durabilidad, velocidad,...",
+      "battle_numbers": "87"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440001",
+      "name": "Batman",
+      "description": "Apodado el caballero oscuro, Bruce Wayne adopto el disfraz de un murcielago para combatir el mal de Gotham",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqQ4r8jFGbBtkqLH1D98KD8aLbT4hzVKforQ&usqp=CAU",
+      "powers": "Intelecto, tecnologia y dinero",
+      "battle_numbers": "57"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440002",
+      "name": "Spiderman",
+      "description": "Apodado el hombre araña, Peter Parker tras ser picado por una araña en un laboratorio adquiere superpoderes",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc0I8xypw9ssz4LBRWZu-BzbSDhCuxzQKV8Q&usqp=CAU",
+      "powers": "Fuerza, velocidad, durabilidad, agilidad, sentidos, reflejos, coordinación, equilibrio y resistencia sobrehumanos",
+      "battle_numbers": "16"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440003",
+      "name": "Ironman",
+      "description": "Tony Stark, genio, multimillonario, playboy y filántropo",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLw5ubh9p0hhOd-iDbSYiVFGf4oZ_bD2HCOg&usqp=CAU",
+      "powers": "Repulsores de energía y misiles de proyección. Regenerativo soporte vital.",
+      "battle_numbers": "69"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440004",
+      "name": "Superman",
+      "description": "El primer super heroe de la historia del comic, viene de otro planeta y tiene muchos poderes",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4clU6CQ3nZ7posihNre6Ki6bJV0NTHUDnHQ&usqp=CAU",
+      "powers": "Súper fuerza, invulnerabilidad, visión calorífica, el aliento helado...",
+      "battle_numbers": "38"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440005",
+      "name": "Lobezno",
+      "description": "También conocido como logan, sufre una mutación genetica que luego se convierte en una mejora de laboratorio",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJeCWh69qpjY78jObPpabVmkpIKL8-Edo7jQ&usqp=CAU",
+      "powers": "Capacidades físicas mejoradas.",
+      "battle_numbers": "54"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440006",
+      "name": "Capitán America",
+      "description": "Peter Rogers, un soldado enclenque, se ofrece voluntario para un experimento el cual aumenta mucho sus condiciones fisicas",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaTy-0IkQyTq6U7xzoAsnqPeHCJTruYH1L5Q&usqp=CAU",
+      "powers": "Sentidos, agilidad, velocidad y fuerza sobrehumanas. Gran habilidad con su escudo. Instinto de liderazgo, gran resistencia, inmune a gases y enfermedades, curación y regeneración acelerada",
+      "battle_numbers": "89"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440008",
+      "name": "Hulk",
+      "description": "Bruce Banner, un cientifico que sufre la radioacion gamma, en un experimento del cual formaba parte, transformandose en verde iy adquieriendo super poderes",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHJ_PMKfSt7mKCoyXVxD2T3r08mnz7VBuizg&usqp=CAU",
+      "powers": "Inmune a las balas, aumento capacidades fisicas...",
+      "battle_numbers": "75"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440009",
+      "name": "Wonder Woman",
+      "description": "La primera super heroína del mundo del comic, hija de dioses",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQms4bfAN3LmOxwDLoZw4CBzs7kMxhyCCuliQ&usqp=CAU",
+      "powers": "Super fuerza, volar, super velocidad, super resistencia...",
+      "battle_numbers": "39"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440010",
+      "name": "Dr. Strange",
+      "description": "Stephen Strange, famoso cirujano, sufre un accidente que le impide operar mas y en busca de soluciones para ello, da con un poder superior, magia",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjew5uQTkTVwEqhOrv9ESBCttf56hhEDOCzA&usqp=CAU",
+      "powers": "Mago, controla el espacio y el tiempo",
+      "battle_numbers": "29"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440011",
+      "name": "Black Panther",
+      "description": "el rey de wakanda, con una alta capacidad tecnologica, dispone de un traje que le permite potenciar ciertas habildiades",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8sjsKvEHtQoeJ1Dnnic7bZmjQ9bsA2Ri79w&usqp=CAU",
+      "powers": "Fuerza sobrehumana, velocidad, reflejos, agilidad, resistencia, durabilidad y sentidos",
+      "battle_numbers": "25"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440012",
+      "name": "Viuda Negra",
+      "description": "Natasha romanov, agente rusa entrenada como espía, artista marcial y francotiradora, y equipada con un arsenal de armas de alta tecnología, que incluye un par de armas",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8G4d6wuvf-9mxJD-GKyKANa_XXEpFN6_aeA&usqp=CAU",
+      "powers": "Envejecimiento tardío. Super velocidad",
+      "battle_numbers": "120"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440013",
+      "name": "Wanda Maximoff",
+      "description": "huérfana que fue mejorada por el Alto Evolucionador en el Monte Wundagore convirtiéndose en un conducto de Magia del Caos que le permitía manipular la probabilidad y deformar la propia realidad.",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9bunXCPSf56sHlGDKpU0cAKf9rWkrjPnd5w&usqp=CAU",
+      "powers": "Capáz de mover y manipular objetos usando su energía psiónica.",
+      "battle_numbers": "44"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440014",
+      "name": "Aquaman",
+      "description": "Aquaman es el gobernante telepático de la Atlántida y de los océanos de la Tierra, un Atlante con increíble fuerza y ​​velocidad, así como la capacidad de ordenar toda la vida marina. Su fisiología única le permite sobrevivir en tierra y en las grandes profundidades del océano de presión y temperatura.",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP1aZChUH8Twk5Y0wx1Pfwa-E0V-gqrBy1AA&usqp=CAU",
+      "powers": "Increíble fuerza y ​​velocidad, así como la capacidad de ordenar toda la vida marina.",
+      "battle_numbers": "33"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440015",
+      "name": "Flash",
+      "description": "Barry allen, tiene la capacidad de superar la velocidad de la luz e incluso viajar en el tiempo",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYhHhZWh2fzoFlwTCzmsUZ7-1uP2yfy492KQ&usqp=CAU",
+      "powers": "Rapidez sobrehumana, la cual incluye la habilidad de correr a gran velocidad, reflejos sobrehumanos y la capacidad de violar algunas leyes de la física.",
+      "battle_numbers": "17"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440016",
+      "name": "Capitana Marvel",
+      "description": "Carol Susan Jane Danvers es una ex piloto de la Fuerza Aérea de los Estados Unidos que, al destruir el Motor de velocidad de la luz fabricado por su mentora Mar-Vell, fue expuesta a la energía del Teseracto, obteniendo poderes cósmicos y fue raptada para servir al Imperio Kree.",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNTjzENFPBRNykqhx-cAPBQC_lW-5P6DGovA&usqp=CAU",
+      "powers": "Capacidad de viajar a la velocidad de la luz. Generación de radiación. Manipulación de energía. Manipulación de la gravedad.",
+      "battle_numbers": "32"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440017",
+      "name": "Ant Man",
+      "description": "ladrón reformado y un experto en electrónica",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB-9JCqW7bCrBCiJaqdSHqzCxBpoLlq9g3WQ&usqp=CAU",
+      "powers": "Poder de encogerse (y de otras personas y objetos junto con él) al tamaño de una hormiga y volver a la normalidad.",
+      "battle_numbers": "25"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440018",
+      "name": "Linterna Verde",
+      "description": "Hal jordan un piloto temerario, encuentra un extraterrestre que pertenece a un grupo intergalactico que le transfiere poderes",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcXX95JUJpFbUkVT5KCUdvrM0GJFBjyAJdxQ&usqp=CAU",
+      "powers": "Jordan es semi-invulnerable, capaz de proyectar construcciones sólidas de luz, volar y utilizar varias otras habilidades a través de su anillo de poder, que sólo están limitadas por su imaginación y fuerza de voluntad. Jordan como un Linterna Verde tiene una fuerza de voluntad excepcional.",
+      "battle_numbers": "33"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440019",
+      "name": "Shazam",
+      "description": "Billy Batson, un niño, que mediante un mago y decir la palabra Shazam se convierte en adulto con superpoderes",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIRqCDY2mCj3GQGBGoNb0LMbh5f94-6DA07Q&usqp=CAU",
+      "powers": "Tiene la sabiduría de Salomón, la fuerza de Hércules, el aguante de Atlas, el poder de Zeus, el coraje de Aquiles y la velocidad de Mercurio. Esto da a Shazam una serie de habilidades muy parecidas a Superman que incluyen súper-fuerza invulnerabilidad y vuelo",
+      "battle_numbers": "9"
+    },
+    {
+      "id": "123e4567-e89b-12d3-a456-426655440020",
+      "name": "Antorcha Humana",
+      "description": "la Antorcha Humana obtuvo sus poderes en una nave espacial bombardeada por rayos cósmicos.",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgUhHHOKQdR2ho7gpQYA4B9_L_6pHdlSKPUQ&usqp=CAU",
+      "powers": "Puede envolver su cuerpo en llamas; volar; piroquinesis",
+      "battle_numbers": "30"
+    }
   ]
 }
-
-
-
-
-
