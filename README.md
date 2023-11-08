@@ -4,10 +4,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `npm serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## Generate docker image
+Run `docker build -t super-hero-daynis .` 
+## Run the docker image
+.Run `docker run -d -it -p 8080:80  super-hero-daynis` and `npm run start`
+
 
 ## Code scaffolding
-
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
