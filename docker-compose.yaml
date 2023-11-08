@@ -1,0 +1,37 @@
+
+services:
+  local:
+   container_name: super-hero-daynis-container
+   build: .
+   image: super-hero-daynis-image
+   restart: always
+   volumes:
+    - /usr/share/nginx/html
+   ports:
+     - '8080:80'
+  json-server:
+   container_name: json-server-container
+   image: json-serve-image
+   build: ./db
+   ports:
+     - '3000:3000'
+   volumes:
+     - ./db/db.json:/data/db.json
+   command: json-server /data/db.json --host 0.0.0.0 --watch
+
+ 
+ 
+
+
+
+
+
+
+# image: super-hero-daynis
+
+ #  ports:
+
+ #    - '8080:80'
+
+   #tty: true
+  # entrypoint: ['npm', 'run', 'local']

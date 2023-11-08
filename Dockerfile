@@ -1,3 +1,4 @@
+
 # STAGE 1: Compile and Build angular codebase
 
 # Use official node image as the base image
@@ -17,7 +18,6 @@ COPY . /app
 RUN npm run build --prod -aot false
 RUN ls -alt
 
-
 # Use official nginx image as the base image 
 FROM nginx:latest
 
@@ -27,4 +27,3 @@ COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80 
 EXPOSE 80
-
