@@ -2,14 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
 
-## Development server
-
-Run `npm serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
 ## Generate docker image
-Run `docker build -t super-hero-daynis .` 
-## Run the docker image
-.Run `docker run -d -it -p 8080:80  super-hero-daynis` and `npm run start`
+Run `docker compose up`. Navigate to `http://localhost:8080/home`. 
 
 
 ## Code scaffolding
