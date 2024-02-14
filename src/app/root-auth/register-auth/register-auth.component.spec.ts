@@ -1,72 +1,105 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  flush,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-
-
 import { AuthService } from '../services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { provideAuth, getAuth } from '@angular/fire/auth'
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app'
-import { environment } from 'src/environments/environment';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideRouter } from '@angular/router';
+import { Router } from '@angular/router';
 import { RegisterAuthComponent } from './register-auth.component';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { LoginAuthComponent } from '../login-auth/login-auth.component';
+import { CustomSnackbarService } from 'src/app/root-common/customSnackbar.service';
 
 describe('RegisterAuthComponent', () => {
   let component: RegisterAuthComponent;
   let fixture: ComponentFixture<RegisterAuthComponent>;
-  let service: AuthService
+  let serviceAuthSpy: any, customSnackbarServiceSpy: any;
+  let router: Router;
 
-
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
+    serviceAuthSpy = jasmine.createSpyObj('SuperherosService', ['register']);
+    customSnackbarServiceSpy = jasmine.createSpyObj('CustomSnackbarService', [
+      'openSnackBar',
+    ]);
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule,  
-        provideFirebaseApp(() => initializeApp(environment.firebase)), 
-        provideAuth(() => getAuth()),
-        BrowserAnimationsModule,
-        ],
+      imports: [
+        RouterTestingModule.withRoutes([
+          { path: 'auth/login', component: LoginAuthComponent },
+        ]),
+      ],
       declarations: [RegisterAuthComponent],
-      providers: [MatSnackBar, AuthService,
-      provideRouter([{path: '**', component: RegisterAuthComponent}]),],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
-    })
-      .compileComponents();
+      providers: [
+        LoginAuthComponent,
+        { provide: AuthService, useValue: serviceAuthSpy },
+        { provide: CustomSnackbarService, useValue: customSnackbarServiceSpy },
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegisterAuthComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-
-    service = TestBed.inject(AuthService)
+    router = TestBed.inject(Router);
   });
 
-
-    it('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Register done incorrectly', (done) => {
+  it('should register satisfactorily ', fakeAsync(() => {
+    serviceAuthSpy.register.and.returnValue(Promise.resolve(null));
+    spyOnProperty(router, 'url', 'get').and.returnValue('auth/login');
 
-    spyOn(service, 'register').and.returnValue( 
-      Promise.reject({ message: 'auth/invalid-login-credentials' }));
-    
-    component.submitForm()
-    expect(service.register).toHaveBeenCalled();
-    done()
+    fixture.detectChanges();
+    component.registerForm.setValue({
+      email: 'example@gmail.com',
+      password: '123456789',
+      password_repeat: '123456789',
+    });
 
-  });
+    component.submitForm();
 
-  it('Successful register', (done) => {
+    expect(serviceAuthSpy.register).toHaveBeenCalled();
+    expect(router.url).toEqual('auth/login');
+    flush();
+    expect(customSnackbarServiceSpy.openSnackBar).toHaveBeenCalled();
+  }));
 
-    spyOn(service, 'register').and.returnValue( 
-      Promise.resolve(null));
-    
-    component.submitForm()
-    expect(service.register).toHaveBeenCalled();
-    done()
+  it('should register and return error ', fakeAsync(() => {
+    serviceAuthSpy.register.and.returnValue(
+      Promise.reject({ message: 'auth/invalid-login-credentials' })
+    );
 
+    fixture.detectChanges();
+
+    component.registerForm.setValue({
+      email: 'example@gmail.com',
+      password: '123456789',
+      password_repeat: '123456789',
+    });
+
+    component.submitForm();
+
+    expect(serviceAuthSpy.register).toHaveBeenCalled();
+    flush();
+    expect(customSnackbarServiceSpy.openSnackBar).toHaveBeenCalled();
+  }));
+
+  it('should register and  password and password_repeat are different', () => {
+    fixture.detectChanges();
+
+    component.registerForm.setValue({
+      email: 'example@gmail.com',
+      password: '12345eee',
+      password_repeat: '123456789',
+    });
+
+    component.submitForm();
+
+    expect(customSnackbarServiceSpy.openSnackBar).toHaveBeenCalled();
   });
 });
-

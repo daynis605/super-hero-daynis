@@ -1,45 +1,51 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SuperherosI } from '../interfaces/superheros';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SuperherosService } from '../services/superheros.service';
 import { take } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDeleteComponent } from '../confirmation-delete/confirmation-delete.component';
 import { Router } from '@angular/router';
+import { CustomSnackbarService } from 'src/app/root-common/customSnackbar.service';
 
 @Component({
   selector: 'app-home-list',
   templateUrl: './home-list.component.html',
-  styleUrls: ['./home-list.component.scss']
+  styleUrls: ['./home-list.component.scss'],
 })
 export class HomeListComponent implements OnInit {
-
-  public displayedColumns: string[] = ['name', 'description', 'powers', 'battle_numbers', 'actions'];
-  public resultsLength = 0;
-  public valueFilter = ''
+  public displayedColumns: string[] = [
+    'name',
+    'description',
+    'powers',
+    'battle_numbers',
+    'actions',
+  ];
+  public totalHeros = 0;
+  public valueFilter = '';
 
   public dataSource!: MatTableDataSource<SuperherosI>;
-  public data: SuperherosI[] = []
+  public listHeros: SuperherosI[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private superherosService: SuperherosService,
+  constructor(
+    private superherosService: SuperherosService,
     public dialog: MatDialog,
-    private _snackBar: MatSnackBar,
-    private router: Router,    private cd: ChangeDetectorRef) { }
-
+    private snackBarService: CustomSnackbarService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loadListAllSuper();
   }
 
-  public edit(superheros: SuperherosI) {
+  public editHero(superheros: SuperherosI) {
     this.router.navigate([`/home/${superheros.id}/edit`]);
   }
 
-  public delete(superheros: SuperherosI, index: number) {
+  public deleteHero(superheros: SuperherosI) {
     const dialogRef = this.dialog.open(ConfirmationDeleteComponent, {
       width: '500px',
       id: 'dialog',
@@ -47,14 +53,20 @@ export class HomeListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.superherosService.deleteSuperHeroById(superheros.id!).pipe(take(1))
+        this.superherosService
+          .deleteSuperHeroById(superheros.id!)
+          .pipe(take(1))
           .subscribe({
             next: () => {
-              this.loadListAllSuper()
-              this.openSnackBar('Eliminado el super héroe exitosamente');
+              this.loadListAllSuper();
+              this.snackBarService.openSnackBar(
+                'Eliminado el super héroe exitosamente'
+              );
             },
             error: () => {
-              this.openSnackBar('Se ha producido un error al tratar de  eliminar un super héroe.');
+              this.snackBarService.openSnackBar(
+                'Se ha producido un error al tratar de  eliminar un super héroe.'
+              );
             },
           });
       }
@@ -66,24 +78,21 @@ export class HomeListComponent implements OnInit {
   }
 
   private loadListAllSuper() {
-    this.superherosService.getAllSuperHeros().pipe(take(1))
+    this.superherosService
+      .getAllSuperHeros()
+      .pipe(take(1))
       .subscribe({
         next: (hero: any) => {
-          this.data = hero
-          this.resultsLength = hero.length
+          this.listHeros = hero;
+          this.totalHeros = hero.length;
           this.dataSource = new MatTableDataSource(hero);
-          this.dataSource!.paginator = this.paginator
+          this.dataSource!.paginator = this.paginator;
         },
         error: (error) => {
-          console.log(error);
+          this.snackBarService.openSnackBar(
+            'Se ha producido un error al cargar el listado de super Heroes.'
+          );
         },
       });
   }
-
-  private openSnackBar(text: string) {
-    this._snackBar.open(text, 'Cerrar', {
-      duration: 5000
-    });
-  }
-
 }

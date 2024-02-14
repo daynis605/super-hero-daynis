@@ -1,71 +1,88 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  flush,
+  TestBed,
+  waitForAsync,
+} from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-
 import { LoginAuthComponent } from './login-auth.component';
 import { AuthService } from '../services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { provideAuth, getAuth } from '@angular/fire/auth'
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app'
-import { environment } from 'src/environments/environment';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideRouter } from '@angular/router';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { HomeListComponent } from 'src/app/root-app/home-list/home-list.component';
+import { CustomSnackbarService } from 'src/app/root-common/customSnackbar.service';
+import { Router } from '@angular/router';
 
 describe('LoginAuthComponent', () => {
   let component: LoginAuthComponent;
   let fixture: ComponentFixture<LoginAuthComponent>;
-  let service: AuthService
+  let serviceAuthSpy: any, customSnackbarServiceSpy: any;
+  let router: Router;
 
-
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
+    serviceAuthSpy = jasmine.createSpyObj('SuperherosService', ['login']);
+    customSnackbarServiceSpy = jasmine.createSpyObj('CustomSnackbarService', [
+      'openSnackBar',
+    ]);
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule,  
-        provideFirebaseApp(() => initializeApp(environment.firebase)), 
-        provideAuth(() => getAuth()),
-        BrowserAnimationsModule,
-        ],
+      imports: [
+        RouterTestingModule.withRoutes([
+          { path: 'home', component: HomeListComponent },
+        ]),
+      ],
       declarations: [LoginAuthComponent],
-      providers: [MatSnackBar, AuthService,
-      provideRouter([{path: '**', component: LoginAuthComponent}]),],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
-    })
-      .compileComponents();
+      providers: [
+        HomeListComponent,
+        { provide: AuthService, useValue: serviceAuthSpy },
+        { provide: CustomSnackbarService, useValue: customSnackbarServiceSpy },
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginAuthComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
 
-    service = TestBed.inject(AuthService)
+    router = TestBed.inject(Router);
   });
 
-
-    it('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Login done incorrectly', (done) => {
+  it('should login satisfactorily ', () => {
+    serviceAuthSpy.login.and.returnValue(Promise.resolve(null));
+    spyOnProperty(router, 'url', 'get').and.returnValue('home');
 
-    spyOn(service, 'login').and.returnValue( 
-      Promise.reject({ message: 'auth/invalid-login-credentials' }));
-    
-    component.submitForm()
-    expect(service.login).toHaveBeenCalled();
-    done()
+    fixture.detectChanges();
+    component.loginForm.setValue({
+      email: 'example@gmail.com',
+      password: '123456789',
+    });
 
+    component.submitForm();
+
+    expect(serviceAuthSpy.login).toHaveBeenCalled();
+    expect(router.url).toEqual('home');
   });
 
-  it('Successful login', (done) => {
+  it('should login and return error ', fakeAsync(() => {
+    serviceAuthSpy.login.and.returnValue(
+      Promise.reject({ message: 'auth/invalid-login-credentials' })
+    );
 
-    spyOn(service, 'login').and.returnValue( 
-      Promise.resolve(null));
-    
-    component.submitForm()
-    expect(service.login).toHaveBeenCalled();
-    done()
+    fixture.detectChanges();
 
-  });
+    component.loginForm.setValue({
+      email: 'example@gmail.com',
+      password: '123456789',
+    });
+
+    component.submitForm();
+
+    expect(serviceAuthSpy.login).toHaveBeenCalled();
+    flush();
+    expect(customSnackbarServiceSpy.openSnackBar).toHaveBeenCalled();
+  }));
 });
-

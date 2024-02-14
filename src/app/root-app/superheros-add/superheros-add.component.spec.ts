@@ -1,105 +1,152 @@
-
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SuperherosAddComponent } from './superheros-add.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { SuperherosService } from '../services/superheros.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HomeListComponent } from '../home-list/home-list.component';
 import { of, throwError } from 'rxjs';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideRouter, Router } from '@angular/router';
-
+import { SuperherosI } from '../interfaces/superheros';
+import { Router } from '@angular/router';
+import { CustomSnackbarService } from 'src/app/root-common/customSnackbar.service';
 
 describe('SuperherosAddComponent', () => {
   let component: SuperherosAddComponent;
   let fixture: ComponentFixture<SuperherosAddComponent>;
+  let superHeroServiceSpy: any, customSnackbarServiceSpy: any;
+  let router: Router;
 
-  let service: SuperherosService
+  const superHeros: SuperherosI[] = [
+    {
+      id: '0',
+      name: 'Super Tour',
+      description: '',
+    },
+    {
+      id: '1',
+      name: 'Super 2',
+      description: '',
+    },
+    {
+      id: '3',
+      name: 'Super 2',
+      description: '',
+    },
+  ];
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
+    superHeroServiceSpy = jasmine.createSpyObj('SuperherosService', [
+      'createSuperHeros',
+      'getAllSuperHeros',
+    ]);
+    customSnackbarServiceSpy = jasmine.createSpyObj('CustomSnackbarService', [
+      'openSnackBar',
+    ]);
+
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, BrowserAnimationsModule],
+      imports: [
+        RouterTestingModule.withRoutes([
+          { path: 'home', component: HomeListComponent },
+        ]),
+      ],
       declarations: [SuperherosAddComponent],
       providers: [
-        MatSnackBar,
-        SuperherosService,
-        provideRouter([{ path: '**', component: SuperherosAddComponent }]),
+        HomeListComponent,
+        { provide: SuperherosService, useValue: superHeroServiceSpy },
+        { provide: CustomSnackbarService, useValue: customSnackbarServiceSpy },
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
-    })
-      .compileComponents()
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+    }).compileComponents();
 
-  }));
-
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(SuperherosAddComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
-
-    service = TestBed.inject(SuperherosService)
-  });
-
+    router = TestBed.inject(Router);
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Creating a user by clicking submit', () => {
+  it('should get all superheroes satisfactorily ', () => {
+    superHeroServiceSpy.getAllSuperHeros.and.returnValue(of(superHeros));
 
-    const spyService = spyOn(service, 'createSuperHeros').and.callFake(() => of(
-      {
-        id: '0', name: 'Super 1', description: ''
-      }
-    ))
-    component.submitForm()
-    expect(spyService).toHaveBeenCalled()
+    fixture.detectChanges();
 
-    expect(TestBed.inject(Router).url)
-      .withContext(TestBed.inject(Router).url)
-      .toEqual('/');
-
+    expect(superHeroServiceSpy.getAllSuperHeros).toHaveBeenCalled();
+    expect(component.listSuperHeros.length).toBe(3);
   });
 
-  it('Create a user and receive an error when doing so ', () => {
-    const spyService = spyOn(service, 'createSuperHeros').and.returnValue(throwError(() => { new Error("Error") }));
-    component.submitForm()
-    expect(spyService).toHaveBeenCalled()
+  it('should get all superheroes and return error ', () => {
+    superHeroServiceSpy.getAllSuperHeros.and.returnValue(
+      throwError(() => new Error('Internar error'))
+    );
+
+    fixture.detectChanges();
+
+    expect(superHeroServiceSpy.getAllSuperHeros).toHaveBeenCalled();
+    expect(customSnackbarServiceSpy.openSnackBar).toHaveBeenCalled();
   });
 
-  it('Performing initial loading of all superheros', () => {
+  it('should submit name of super hero exist ', () => {
+    superHeroServiceSpy.getAllSuperHeros.and.returnValue(of(superHeros));
+    fixture.detectChanges();
 
-    spyOn(service, 'getAllSuperHeros').and.returnValue(of([
-      {
-        id: '0', name: 'Super 1', description: '', photo: '', powers: '', battle_numbers: 6
-      }
-    ]));
-    spyOn(component, 'ngOnInit').and.callThrough();
-    component.ngOnInit();
-    expect(service.getAllSuperHeros).toHaveBeenCalled();
-    expect(component.listSuper.length).toBe(1)
-
-  });
-
-  it('Doing the initial loading of the superhero and getting an error', () => {
-    spyOn(service, 'getAllSuperHeros').and.returnValue(throwError(() => { new Error("Error") }));
-    spyOn(component, 'ngOnInit').and.callThrough();
-    component.ngOnInit();
-    expect(service.getAllSuperHeros).toHaveBeenCalled();
-    expect(component.listSuper.length).toBe(0)
-  });
-
-  it('Searching by name', () => {
-    const spyService = spyOn(service, 'createSuperHeros').and.returnValue(throwError(() => { new Error("Error") }));
-    component.listSuper = [{ id: '0', name: 'Super 1' }, { id: '2', name: 'Super 2' }]
+    component.listSuperHeros = superHeros;
     component.addForm.setValue({
-      name: 'Super 1', description: '', photo: '',
-      powers: '', battle_numbers: ''
-    })
-  
+      name: 'Super Tour',
+      description: '',
+      photo: '',
+      powers: '',
+      battle_numbers: '',
+    });
+
     component.submitForm();
-    expect(spyService).not.toHaveBeenCalled();
+
+    expect(customSnackbarServiceSpy.openSnackBar).toHaveBeenCalled();
   });
 
-});
+  it('should submit form create super hero satisfactorily ', () => {
+    superHeroServiceSpy.createSuperHeros.and.returnValue(of(superHeros[0]));
+    superHeroServiceSpy.getAllSuperHeros.and.returnValue(of(superHeros));
+    spyOnProperty(router, 'url', 'get').and.returnValue('home');
+    fixture.detectChanges();
 
+    component.listSuperHeros = superHeros;
+    component.addForm.setValue({
+      name: 'Super Other',
+      description: '',
+      photo: '',
+      powers: '',
+      battle_numbers: '',
+    });
+
+    component.submitForm();
+
+    expect(superHeroServiceSpy.createSuperHeros).toHaveBeenCalled();
+    expect(router.url).toEqual('home');
+  });
+
+  it('should submit form create super hero and return error ', () => {
+    superHeroServiceSpy.createSuperHeros.and.returnValue(
+      throwError(() => {
+        new Error('Error');
+      })
+    );
+    superHeroServiceSpy.getAllSuperHeros.and.returnValue(of(superHeros));
+    spyOnProperty(router, 'url', 'get').and.returnValue('home');
+    fixture.detectChanges();
+
+    component.listSuperHeros = superHeros;
+    component.addForm.setValue({
+      name: 'Super Other',
+      description: '',
+      photo: '',
+      powers: '',
+      battle_numbers: '',
+    });
+
+    component.submitForm();
+
+    expect(superHeroServiceSpy.createSuperHeros).toHaveBeenCalled();
+    expect(customSnackbarServiceSpy.openSnackBar).toHaveBeenCalled();
+  });
+});
