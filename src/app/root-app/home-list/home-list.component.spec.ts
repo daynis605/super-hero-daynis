@@ -23,6 +23,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RootMaterialModule } from 'src/app/root-material/root-material.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomSnackbarService } from 'src/app/root-common/customSnackbar.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 describe('HomeListComponent', () => {
   let fixture: ComponentFixture<HomeListComponent>;
@@ -31,6 +32,10 @@ describe('HomeListComponent', () => {
   let router: Router;
   let superHeroServiceSpy: any, customSnackbarServiceSpy: any, dialogSpy: any;
 
+  const listSuperheroes: SuperherosI[] = [
+    { id: '1', name: 'Ssuperheroe 1' },
+    { id: '1', name: 'Ssuperheroe 1' },
+  ];
   beforeEach(waitForAsync(() => {
     superHeroServiceSpy = jasmine.createSpyObj('SuperherosService', [
       'deleteSuperHeroById',
@@ -62,22 +67,18 @@ describe('HomeListComponent', () => {
 
     fixture = TestBed.createComponent(HomeListComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges;
     router = TestBed.inject(Router);
   }));
+
+  beforeEach(() => {
+    superHeroServiceSpy.getAllSuperHeros.and.returnValue(of(listSuperheroes));
+  });
 
   it('should create component', () => {
     expect(component).toBeTruthy();
   });
 
   it('should get a list of superheroes successfully', () => {
-    const listSuperheroes: SuperherosI[] = [
-      { id: '1', name: 'Ssuperheroe 1' },
-      { id: '1', name: 'Ssuperheroe 1' },
-    ];
-
-    superHeroServiceSpy.getAllSuperHeros.and.returnValue(of(listSuperheroes));
-
     component.ngOnInit();
 
     expect(component.listHeros.length).toBe(2);
@@ -108,13 +109,6 @@ describe('HomeListComponent', () => {
   });
 
   it('should open dialog and hero delete successfully', fakeAsync(() => {
-    const listSuperheroes: SuperherosI[] = [
-      { id: '1', name: 'Ssuperheroe 1' },
-      { id: '1', name: 'Ssuperheroe 1' },
-    ];
-
-    superHeroServiceSpy.getAllSuperHeros.and.returnValue(of(listSuperheroes));
-
     const dialogRef = {
       afterClosed: () => of(true),
     } as MatDialogRef<any>;
@@ -135,33 +129,8 @@ describe('HomeListComponent', () => {
     expect(superHeroServiceSpy.getAllSuperHeros).toHaveBeenCalled();
   }));
 
-  it('should open dialog and return hero delete error', () => {
-    const superHero: SuperherosI = { id: '1', name: 'PP' };
-
-    const dialogRef = {
-      afterClosed: () => of(true),
-    } as MatDialogRef<any>;
-
-    dialogSpy.open.and.returnValue(dialogRef);
-    superHeroServiceSpy.deleteSuperHeroById.and.returnValue(
-      throwError(() => new Error('404'))
-    );
-
-    component.deleteHero(superHero);
-
-    expect(dialogSpy.open).toHaveBeenCalled();
-    expect(superHeroServiceSpy.deleteSuperHeroById).toHaveBeenCalled();
-    expect(customSnackbarServiceSpy.openSnackBar).toHaveBeenCalled();
-  });
-
   it('should apply filter', () => {
     component.valueFilter = 'Tour';
-    const listSuperheroes: SuperherosI[] = [
-      { id: '1', name: 'Ssuperheroe 1' },
-      { id: '1', name: 'Ssuperheroe 1' },
-    ];
-
-    superHeroServiceSpy.getAllSuperHeros.and.returnValue(of(listSuperheroes));
     component.dataSource = new MatTableDataSource(listSuperheroes);
 
     fixture.detectChanges();
@@ -169,4 +138,42 @@ describe('HomeListComponent', () => {
     component.filterApply();
     expect(component.dataSource.filter).toEqual('tour');
   });
+
+  it('should open dialog and return hero delete error internal server', fakeAsync(() => {
+    const superHero: SuperherosI = { id: '1', name: 'PP' };
+
+    const dialogRef = {
+      afterClosed: () => of(true),
+    } as MatDialogRef<any>;
+    dialogSpy.open.and.returnValue(dialogRef);
+    superHeroServiceSpy.deleteSuperHeroById.and.returnValue(
+      throwError(() => new HttpErrorResponse({ status: 500 }))
+    );
+
+    component.deleteHero(superHero);
+
+    expect(dialogSpy.open).toHaveBeenCalled();
+    flush();
+    expect(superHeroServiceSpy.deleteSuperHeroById).toHaveBeenCalled();
+    expect(customSnackbarServiceSpy.openSnackBar).toHaveBeenCalled();
+  }));
+
+  it('should open dialog and return hero delete error ', fakeAsync(() => {
+    const superHero: SuperherosI = { id: '1', name: 'PP' };
+
+    const dialogRef = {
+      afterClosed: () => of(true),
+    } as MatDialogRef<any>;
+    dialogSpy.open.and.returnValue(dialogRef);
+    superHeroServiceSpy.deleteSuperHeroById.and.returnValue(
+      throwError(() => new HttpErrorResponse({ status: 404 }))
+    );
+
+    component.deleteHero(superHero);
+
+    expect(dialogSpy.open).toHaveBeenCalled();
+    flush();
+    expect(superHeroServiceSpy.deleteSuperHeroById).toHaveBeenCalled();
+    expect(customSnackbarServiceSpy.openSnackBar).toHaveBeenCalled();
+  }));
 });

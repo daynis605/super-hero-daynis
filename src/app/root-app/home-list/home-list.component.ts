@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDeleteComponent } from '../confirmation-delete/confirmation-delete.component';
 import { Router } from '@angular/router';
 import { CustomSnackbarService } from 'src/app/root-common/customSnackbar.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-home-list',
@@ -57,16 +58,13 @@ export class HomeListComponent implements OnInit {
           .deleteSuperHeroById(superheros.id!)
           .pipe(take(1))
           .subscribe({
-            next: () => {
-              this.loadListAllSuper();
-              this.snackBarService.openSnackBar(
-                'Eliminado el super héroe exitosamente'
-              );
-            },
-            error: () => {
-              this.snackBarService.openSnackBar(
-                'Se ha producido un error al tratar de  eliminar un super héroe.'
-              );
+            next: () => this.showNotification(),
+            error: (error: HttpErrorResponse) => {
+              if (error.status != 500)
+                this.snackBarService.openSnackBar(
+                  'Se ha producido un error al tratar de  eliminar un super héroe.'
+                );
+              this.showNotification();
             },
           });
       }
@@ -75,6 +73,11 @@ export class HomeListComponent implements OnInit {
 
   public filterApply() {
     this.dataSource.filter = this.valueFilter.trim().toLowerCase();
+  }
+
+  public showNotification() {
+    this.loadListAllSuper();
+    this.snackBarService.openSnackBar('Eliminado el super héroe exitosamente');
   }
 
   private loadListAllSuper() {

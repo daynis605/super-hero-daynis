@@ -9,6 +9,7 @@ import {
   isExistSuperHero,
   superHeroFactory,
 } from 'src/app/root-common/common-filter';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-superheros-edit',
@@ -57,16 +58,13 @@ export class SuperherosEditComponent implements OnInit {
       .updateSuperHeros(superhero)
       .pipe(take(1))
       .subscribe({
-        next: () => {
-          this.snackBarService.openSnackBar(
-            'Editado el super héroe exitosamente'
-          );
-          this.router.navigate(['/home']);
-        },
-        error: () => {
-          this.snackBarService.openSnackBar(
-            'Se ha producido un error al editar el super héroe,'
-          );
+        next: () => this.showNotification(),
+        error: (error: HttpErrorResponse) => {
+          if (error.status != 500)
+            this.snackBarService.openSnackBar(
+              'Se ha producido un error al editar el super héroe,'
+            );
+          this.showNotification();
         },
       });
   }
@@ -108,5 +106,10 @@ export class SuperherosEditComponent implements OnInit {
           );
         },
       });
+  }
+
+  private showNotification() {
+    this.snackBarService.openSnackBar('Editado el super héroe exitosamente');
+    this.router.navigate(['/home']);
   }
 }

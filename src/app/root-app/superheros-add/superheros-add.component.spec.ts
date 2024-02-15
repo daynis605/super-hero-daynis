@@ -8,6 +8,7 @@ import { of, throwError } from 'rxjs';
 import { SuperherosI } from '../interfaces/superheros';
 import { Router } from '@angular/router';
 import { CustomSnackbarService } from 'src/app/root-common/customSnackbar.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 describe('SuperherosAddComponent', () => {
   let component: SuperherosAddComponent;
@@ -126,14 +127,14 @@ describe('SuperherosAddComponent', () => {
   });
 
   it('should submit form create super hero and return error ', () => {
-    superHeroServiceSpy.createSuperHeros.and.returnValue(
-      throwError(() => {
-        new Error('Error');
-      })
-    );
     superHeroServiceSpy.getAllSuperHeros.and.returnValue(of(superHeros));
     spyOnProperty(router, 'url', 'get').and.returnValue('home');
+
     fixture.detectChanges();
+
+    superHeroServiceSpy.createSuperHeros.and.returnValue(
+      throwError(() => new HttpErrorResponse({ status: 500 }))
+    );
 
     component.listSuperHeros = superHeros;
     component.addForm.setValue({

@@ -15,11 +15,10 @@
         <span class="material-symbols-outlined icon">logout</span>
       </mat-icon>
     </div>
+    <div class="loader px-0" *ngIf="loading.isLoading | async">
+      <mat-progress-bar mode="indeterminate" value="40"></mat-progress-bar>
+    </div>
   </header>
-
-  <div class="loader" *ngIf="loading.isLoading | async">
-    <mat-progress-bar mode="indeterminate" value="40"></mat-progress-bar>
-  </div>
 
   <body>
     <router-outlet></router-outlet>

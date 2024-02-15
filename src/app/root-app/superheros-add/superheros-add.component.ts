@@ -9,6 +9,7 @@ import {
   isExistSuperHero,
   superHeroFactory,
 } from 'src/app/root-common/common-filter';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-superheros-add',
@@ -50,16 +51,13 @@ export class SuperherosAddComponent implements OnInit {
       .createSuperHeros(superheros)
       .pipe(take(1))
       .subscribe({
-        next: () => {
-          this.snackBarService.openSnackBar(
-            'Adicionado el super héroe exitosamente'
-          );
-          this.router.navigate(['/home']);
-        },
-        error: () => {
-          this.snackBarService.openSnackBar(
-            'Se ha producido un error al adicionado el super héroe,'
-          );
+        next: () => this.showNotification(),
+        error: (error: HttpErrorResponse) => {
+          if (error.status != 500)
+            this.snackBarService.openSnackBar(
+              'Se ha producido un error al adicionado el super héroe,'
+            );
+          this.showNotification();
         },
       });
   }
@@ -78,5 +76,10 @@ export class SuperherosAddComponent implements OnInit {
           );
         },
       });
+  }
+
+  private showNotification() {
+    this.snackBarService.openSnackBar('Adicionado el super héroe exitosamente');
+    this.router.navigate(['/home']);
   }
 }

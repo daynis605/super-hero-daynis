@@ -7,6 +7,7 @@ import { HomeListComponent } from '../home-list/home-list.component';
 import { CustomSnackbarService } from 'src/app/root-common/customSnackbar.service';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 describe('SuperherosEditComponent', () => {
   let component: SuperherosEditComponent;
@@ -107,9 +108,7 @@ describe('SuperherosEditComponent', () => {
 
   it('should submit form edit super hero and return error ', () => {
     superHeroServiceSpy.updateSuperHeros.and.returnValue(
-      throwError(() => {
-        new Error('Error');
-      })
+      throwError(() => new HttpErrorResponse({ status: 500 }))
     );
 
     fixture.detectChanges();
