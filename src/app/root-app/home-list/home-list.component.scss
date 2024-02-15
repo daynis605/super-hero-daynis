@@ -1,3 +1,9 @@
+@mixin overflow-text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .list-superheros__list {
     max-height: 471px;
     overflow-x: auto;
@@ -15,11 +21,11 @@ tr.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row.ng-star-inserted
     font-family: "Encode-Regular";
 }
 
-tr.mat-mdc-row.mdc-data-table__row:nth-child(odd) {
+tr:nth-child(odd) {
     background-color: var(--color-bg-table);
 }
 
-tr.mat-mdc-row.mdc-data-table__row:nth-child(even) {
+tr:nth-child(even) {
     background-color: var(--color-bg-table-light);
 }
 
@@ -29,20 +35,17 @@ td.mat-column-actions {
 
 td.mat-column-powers {
     max-width: 22rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    @include overflow-text;
 }
 
 td.mat-column-description {
     max-width: 21rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    @include overflow-text;
 }
 
 .icon {
     color: var(--color-primary);
+
     &__delete {
         color: var(--color-error);
     }
@@ -50,10 +53,11 @@ td.mat-column-description {
 
 .btn-main {
     height: 3.5rem;
+
     &--modificate {
         position: absolute;
         right: var(--font-text);
-   
+
     }
 }
 

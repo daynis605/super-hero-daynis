@@ -6,7 +6,7 @@ import { appGuard } from './root-app/guard/app.guard';
 const routes: Routes = [
   {
     path: 'home',
-    canActivate:[appGuard],
+    canActivate: [appGuard],
     loadChildren: () =>
       import('./root-app/root-app.module').then((m) => m.RootAppModule),
   },
@@ -14,24 +14,26 @@ const routes: Routes = [
     path: 'auth',
     canActivate: [authGuard],
     loadChildren: () =>
-    import('./root-auth/root-auth.module').then((m) => m.RootAuthModule),
+      import('./root-auth/root-auth.module').then((m) => m.RootAuthModule),
   },
   {
     path: '',
     redirectTo: 'home',
-    pathMatch:'full'
+    pathMatch: 'full',
   },
   {
     path: '**',
     redirectTo: 'home',
-    pathMatch:'full'
+    pathMatch: 'full',
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-})],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      initialNavigation: 'enabledBlocking',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

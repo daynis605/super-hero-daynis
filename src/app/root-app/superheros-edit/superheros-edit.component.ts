@@ -5,6 +5,10 @@ import { take } from 'rxjs';
 import { SuperherosI } from '../interfaces/superheros';
 import { SuperherosService } from '../services/superheros.service';
 import { CustomSnackbarService } from 'src/app/root-common/customSnackbar.service';
+import {
+  isExistSuperHero,
+  superHeroFactory,
+} from 'src/app/root-common/common-filter';
 
 @Component({
   selector: 'app-superheros-edit',
@@ -13,6 +17,7 @@ import { CustomSnackbarService } from 'src/app/root-common/customSnackbar.servic
 })
 export class SuperherosEditComponent implements OnInit {
   public editForm!: FormGroup;
+  public listSuperHeros: SuperherosI[] = [];
 
   public hero!: SuperherosI | null;
   @Input() id = '0';
@@ -32,19 +37,24 @@ export class SuperherosEditComponent implements OnInit {
       battle_numbers: new FormControl(0),
     });
     this.loadSuperHeroById();
+    this.loadSuperAllHero();
   }
 
   public submitForm() {
-    const superheros: SuperherosI = {
-      name: this.editForm.value.name!!,
-      description: this.editForm.value.description!!,
-      photo: this.editForm.value.photo!!,
-      battle_numbers: this.editForm.value.battle_numbers!!,
-      powers: this.editForm.value.powers!!,
-      id: this.id,
-    };
+    let superhero = superHeroFactory(this.editForm);
+    superhero.id = this.hero?.id;
+
+    if (
+      superhero.name != this.hero?.name &&
+      isExistSuperHero(superhero, this.listSuperHeros)
+    ) {
+      this.snackBarService.openSnackBar(
+        'No pueden editar el super héroes con ese nombre porque ya existe.'
+      );
+      return;
+    }
     this.superherosService
-      .updateSuperHeros(superheros)
+      .updateSuperHeros(superhero)
       .pipe(take(1))
       .subscribe({
         next: () => {
@@ -53,7 +63,7 @@ export class SuperherosEditComponent implements OnInit {
           );
           this.router.navigate(['/home']);
         },
-        error: (error) => {
+        error: () => {
           this.snackBarService.openSnackBar(
             'Se ha producido un error al editar el super héroe,'
           );
@@ -76,7 +86,23 @@ export class SuperherosEditComponent implements OnInit {
             battle_numbers: hero.battle_numbers!,
           });
         },
-        error: (error) => {
+        error: () => {
+          this.snackBarService.openSnackBar(
+            'Se ha producido un error al cargar los datos del super héroe. Intente esta operación más tarde'
+          );
+        },
+      });
+  }
+
+  private loadSuperAllHero() {
+    this.superherosService
+      .getAllSuperHeros()
+      .pipe(take(1))
+      .subscribe({
+        next: (hero: SuperherosI[]) => {
+          this.listSuperHeros = hero;
+        },
+        error: () => {
           this.snackBarService.openSnackBar(
             'Se ha producido un error al cargar los datos del super héroe. Intente esta operación más tarde'
           );

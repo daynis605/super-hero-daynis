@@ -5,6 +5,10 @@ import { SuperherosI } from '../interfaces/superheros';
 import { take } from 'rxjs';
 import { Router } from '@angular/router';
 import { CustomSnackbarService } from 'src/app/root-common/customSnackbar.service';
+import {
+  isExistSuperHero,
+  superHeroFactory,
+} from 'src/app/root-common/common-filter';
 
 @Component({
   selector: 'app-superheros-add',
@@ -34,42 +38,30 @@ export class SuperherosAddComponent implements OnInit {
   }
 
   public submitForm() {
-    const { name, description, photo, powers, battle_numbers } =
-      this.addForm.value;
-    const superheros: SuperherosI = {
-      name,
-      description,
-      photo,
-      powers,
-      battle_numbers,
-    };
+    const superheros = superHeroFactory(this.addForm);
 
-    const hero = this.listSuperHeros.find(
-      (hero) =>
-        hero.name.toLocaleUpperCase() === superheros.name.toLocaleUpperCase()
-    );
-
-    if (hero == undefined) {
-      this.superherosService
-        .createSuperHeros(superheros)
-        .pipe(take(1))
-        .subscribe({
-          next: () => {
-            this.snackBarService.openSnackBar(
-              'Adicionado el super héroe exitosamente'
-            );
-            this.router.navigate(['/home']);
-          },
-          error: (error) => {
-            this.snackBarService.openSnackBar(
-              'Se ha producido un error al adicionado el super héroe,'
-            );
-          },
-        });
+    if (isExistSuperHero(superheros, this.listSuperHeros)) {
+      this.snackBarService.openSnackBar(
+        'No pueden existir super héroes con el mismo nombre'
+      );
+      return;
     }
-    this.snackBarService.openSnackBar(
-      'No pueden existir super héroes con el mismo nombre'
-    );
+    this.superherosService
+      .createSuperHeros(superheros)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.snackBarService.openSnackBar(
+            'Adicionado el super héroe exitosamente'
+          );
+          this.router.navigate(['/home']);
+        },
+        error: () => {
+          this.snackBarService.openSnackBar(
+            'Se ha producido un error al adicionado el super héroe,'
+          );
+        },
+      });
   }
 
   private loadSuperAllHero() {
@@ -80,7 +72,7 @@ export class SuperherosAddComponent implements OnInit {
         next: (hero: SuperherosI[]) => {
           this.listSuperHeros = hero;
         },
-        error: (error) => {
+        error: () => {
           this.snackBarService.openSnackBar(
             'Se ha producido un error al cargar los datos del super héroe. Intente esta operación más tarde'
           );

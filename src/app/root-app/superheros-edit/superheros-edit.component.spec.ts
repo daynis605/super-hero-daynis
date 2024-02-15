@@ -19,9 +19,11 @@ describe('SuperherosEditComponent', () => {
     name: 'Super Tour',
     description: '',
   };
+
   beforeEach(waitForAsync(() => {
     superHeroServiceSpy = jasmine.createSpyObj('SuperherosService', [
       'getSuperHeroById',
+      'getAllSuperHeros',
       'updateSuperHeros',
     ]);
     customSnackbarServiceSpy = jasmine.createSpyObj('CustomSnackbarService', [
@@ -41,27 +43,31 @@ describe('SuperherosEditComponent', () => {
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     }).compileComponents();
-  }));
-
-  beforeEach(() => {
     fixture = TestBed.createComponent(SuperherosEditComponent);
     component = fixture.componentInstance;
     router = TestBed.inject(Router);
+  }));
+
+  beforeEach(() => {
+    superHeroServiceSpy.getAllSuperHeros.and.returnValue(of([editSuperHero]));
+    superHeroServiceSpy.getSuperHeroById.and.returnValue(of(editSuperHero));
   });
 
   it('should create', () => {
     expect(component).toBeDefined();
   });
 
-  it('should get a superhero by id satisfactorily ', () => {
-    superHeroServiceSpy.getSuperHeroById.and.returnValue(
-      of({
-        id: '0',
-        name: 'Super Tour',
-        description: '',
-      })
+  it('should get all superheros and return error', () => {
+    superHeroServiceSpy.getAllSuperHeros.and.returnValue(
+      throwError(() => new Error('Internar error'))
     );
+    fixture.detectChanges();
 
+    expect(superHeroServiceSpy.getAllSuperHeros).toHaveBeenCalled();
+    expect(customSnackbarServiceSpy.openSnackBar).toHaveBeenCalled();
+  });
+
+  it('should get a superhero by id satisfactorily ', () => {
     fixture.detectChanges();
 
     expect(superHeroServiceSpy.getSuperHeroById).toHaveBeenCalled();
@@ -80,7 +86,6 @@ describe('SuperherosEditComponent', () => {
   });
 
   it('should submit form edit super hero satisfactorily ', () => {
-    superHeroServiceSpy.getSuperHeroById.and.returnValue(of(editSuperHero));
     superHeroServiceSpy.updateSuperHeros.and.returnValue(of(editSuperHero));
     spyOnProperty(router, 'url', 'get').and.returnValue('home');
     fixture.detectChanges();
@@ -101,7 +106,6 @@ describe('SuperherosEditComponent', () => {
   });
 
   it('should submit form edit super hero and return error ', () => {
-    superHeroServiceSpy.getSuperHeroById.and.returnValue(of(editSuperHero));
     superHeroServiceSpy.updateSuperHeros.and.returnValue(
       throwError(() => {
         new Error('Error');

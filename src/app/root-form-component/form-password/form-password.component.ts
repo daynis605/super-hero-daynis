@@ -25,7 +25,6 @@ export class FormPasswordComponent {
   public type = InputType.password;
   public activeIcon = PasswordEyeIcon.visibilityOn;
 
-
   public toggleType() {
     if (this.type === InputType.password) {
       this.type = InputType.text;

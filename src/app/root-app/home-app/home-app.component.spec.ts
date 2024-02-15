@@ -41,7 +41,6 @@ describe('HomeAppComponent', () => {
     component = fixture.componentInstance;
     loadingServiceSpy = TestBed.inject(LoaderService);
     router = TestBed.inject(Router);
-    fixture.detectChanges();
   });
 
   it('should create component', () => {
